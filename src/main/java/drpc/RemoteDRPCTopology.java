@@ -22,7 +22,7 @@ public class RemoteDRPCTopology {
         drpcServers.add("127.0.0.1");
 
         config.put(Config.DRPC_SERVERS, drpcServers);
-        config.put(Config.DRPC_PORT, "3227");
+        config.put(Config.DRPC_PORT, 3227);
 
         StormSubmitter.submitTopology("remote-drpc", config, builder.createRemoteTopology());
     }
