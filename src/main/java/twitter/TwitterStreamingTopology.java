@@ -1,14 +1,8 @@
 package twitter;
 
-import bolts.CassandraCounterBolt;
-import bolts.WordCounterBolt;
-import bolts.WordSplitterBolt;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
-import org.apache.storm.kafka.*;
-import org.apache.storm.spout.SchemeAsMultiScheme;
 import org.apache.storm.topology.TopologyBuilder;
-import org.apache.storm.tuple.Fields;
 
 public class TwitterStreamingTopology {
 

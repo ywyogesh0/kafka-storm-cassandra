@@ -2,6 +2,7 @@ package twitter;
 
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
+import org.apache.storm.topology.IRichSpout;
 import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseRichSpout;
 import org.apache.storm.tuple.Fields;
@@ -13,7 +14,37 @@ import twitter4j.conf.ConfigurationBuilder;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class TwitterStreamingSpout extends BaseRichSpout {
+public class TwitterStreamingSpout implements IRichSpout {
+
+    @Override
+    public void close() {
+        twitterStream.shutdown();
+    }
+
+    @Override
+    public void activate() {
+
+    }
+
+    @Override
+    public void deactivate() {
+
+    }
+
+    @Override
+    public void ack(Object o) {
+
+    }
+
+    @Override
+    public void fail(Object o) {
+
+    }
+
+    @Override
+    public Map<String, Object> getComponentConfiguration() {
+        return null;
+    }
 
     private SpoutOutputCollector spoutOutputCollector;
     private TwitterStream twitterStream;
@@ -65,10 +96,10 @@ public class TwitterStreamingSpout extends BaseRichSpout {
             }
         };
 
+        twitterStream.addListener(statusListener);
+
         final FilterQuery query = new FilterQuery();
         query.track(new String[]{"Avengers"});
-
-        twitterStream.addListener(statusListener);
         twitterStream.filter(query);
     }
 

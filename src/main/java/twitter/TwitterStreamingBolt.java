@@ -19,7 +19,7 @@ public class TwitterStreamingBolt extends BaseRichBolt {
     @Override
     public void execute(Tuple tuple) {
         Status status = (Status) tuple.getValue(0);
-        System.out.println(status.getText());
+        System.out.println("DEBUG = " + status.getText());
     }
 
     @Override
