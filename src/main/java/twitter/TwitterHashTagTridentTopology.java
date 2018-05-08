@@ -1,7 +1,7 @@
 package twitter;
 
 import org.apache.storm.Config;
-import org.apache.storm.LocalCluster;
+import org.apache.storm.StormSubmitter;
 import org.apache.storm.trident.TridentTopology;
 import org.apache.storm.trident.operation.builtin.Count;
 import org.apache.storm.trident.operation.builtin.Debug;
@@ -11,7 +11,7 @@ import org.apache.storm.tuple.Fields;
 
 public class TwitterHashTagTridentTopology {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
 
         TridentTopology topology = new TridentTopology();
 
@@ -26,10 +26,6 @@ public class TwitterHashTagTridentTopology {
         Config config = new Config();
         config.setDebug(true);
 
-        LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology("twitter-trident-hashtag-extractor", config, topology.build());
-
-        Thread.sleep(30000);
-        cluster.shutdown();
+        StormSubmitter.submitTopology("twitter-trident-hashtag-extractor", config, topology.build());
     }
 }
